@@ -1,0 +1,25 @@
+/** 
+* FORM MAIN STYLES
+*/
+
+.form-custom {
+    &__label {
+        font-size: 1.4rem;
+        color: $triviagame-softgray
+    }
+    &__input {
+        outline: none;
+        background-color: #2A3B47;
+        border: none;
+        padding: 1rem 2rem;
+        color: $triviagame-graywhite;
+        border-radius: .3rem;
+        font-size: $font-size-14;
+    }
+    &__group {
+        &--small {
+            width: 49%;
+        }
+    }
+}
+
