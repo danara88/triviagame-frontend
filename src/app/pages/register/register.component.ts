@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -10,11 +12,17 @@ import { UserService } from '../../services/user.service';
 export class RegisterComponent implements OnInit {
 
   public formCustom: FormGroup;
+  public messageError: string;
 
   constructor( 
     private fb: FormBuilder,
-    private userService: UserService) { 
+    private userService: UserService,
+    private spinner: NgxSpinnerService,
+    private router: Router) { 
+
     this.formCustom = new FormGroup({});
+    this.messageError = '';
+
   }
 
   ngOnInit(): void {
@@ -67,13 +75,32 @@ export class RegisterComponent implements OnInit {
         control.markAllAsTouched();
       });
       return;
-    }
+    } 
 
+    this.spinner.show();
     // Register API
-    this.userService.register(this.formCustom.value).subscribe(user => {
-      console.log(user);
+    this.userService.register(this.formCustom.value).subscribe(resp => {
+      this.spinner.hide();
+      
+      // Save token and identity in local storage
+      localStorage.setItem('access_token',resp.token);
+      localStorage.setItem('identity', JSON.stringify(resp.user));
+
+      this.router.navigateByUrl('/home');
+
     }, error => {
+      this.spinner.hide();
       console.log(error);
+      let errorsObj = error.error;
+      
+      if (errorsObj.email) {
+
+        this.messageError = errorsObj.email.msg;
+        this.formCustom.controls.email.setErrors({ hasErrors: true });
+        this.formCustom.controls.password.setValue('');
+        this.formCustom.controls.repeatPassword.setValue('');
+
+      }
     });
 
   }

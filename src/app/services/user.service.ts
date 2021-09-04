@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
-import { RegisterForm } from '../interfaces/user';
+import { RegisterForm, RegisterResponse } from '../interfaces/user';
 import { Observable } from 'rxjs';
 
 const apiUrl = environment.API_URL;
@@ -19,8 +18,8 @@ export class UserService {
    * @param data 
    * @returns 
    */
-  register(data: RegisterForm): Observable<User> {
-    return this.http.post<User>(`${ apiUrl }/users`, data);
+  register(data: RegisterForm): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(`${ apiUrl }/users`, data);
   }
   
 }
