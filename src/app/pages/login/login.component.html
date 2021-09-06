@@ -1,0 +1,43 @@
+<app-header></app-header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 auth">
+
+            <div class="box">
+                Login
+                <form [formGroup]="formCustom" class="form-custom mt-4" (ngSubmit)="onSubmit()">
+
+                    <div class="form-custom__group d-flex flex-column mt-3"
+                         [class.form-custom__group--error]="loginFail">
+                        <label class="form-custom__label mb-2">Email</label>
+                        <input  type="text" 
+                                class="form-custom__input" 
+                                formControlName="email">
+                        <i class="fas fa-exclamation-circle form-custom__group-icon"  *ngIf="loginFail"></i>
+                        <span class="form-custom__message-error" 
+                              *ngIf="loginFail">The password or email is invalid</span>
+                    </div>
+
+                    <div class="form-custom__group d-flex flex-column mt-3">
+                        <label class="form-custom__label mb-2">Password</label>
+                        <input  type="password" 
+                                class="form-custom__input" 
+                                formControlName="password">
+                    </div>
+
+                    <button type="submit" class="btn-custom btn-custom--large mt-5">
+                        Login
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#1083d5" type = "line-scale-pulse-out" [fullScreen] = "true"></ngx-spinner>
+
+
+

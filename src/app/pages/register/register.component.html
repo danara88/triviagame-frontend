@@ -40,7 +40,9 @@
                                     formControlName="password">
                             <i class="fas fa-exclamation-circle form-custom__group-icon"  *ngIf="invalidField('password')"></i>
                             <span class="form-custom__message-error" 
-                                    *ngIf="invalidField('password')">Invalid password</span>
+                                    *ngIf="invalidField('password') && errorPasswordMessage.length === 0">Invalid password</span>
+                            <span class="form-custom__message-error"
+                                    *ngIf="errorPasswordMessage.length !== 0">{{ errorPasswordMessage }}</span>
                         </div>
                         <div class="form-custom__group form-custom__group--small d-flex flex-column"
                              [class.form-custom__group--error]="invalidField('repeatPassword')">

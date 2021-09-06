@@ -12,7 +12,15 @@ export interface RegisterForm {
 /**
  * This is the response of the register API
  */
-export interface RegisterResponse {
+export interface RegisterAuthResponse {
     token: string,
     user: User
+}
+
+/**
+ * These fields are sent to the API Login
+ */
+export interface LoginRequest {
+    email: string,
+    password: string
 }

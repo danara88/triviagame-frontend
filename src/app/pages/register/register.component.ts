@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
 
   public formCustom: FormGroup;
   public messageError: string;
+  public errorPasswordMessage: string;
 
   constructor( 
     private fb: FormBuilder,
@@ -22,6 +23,8 @@ export class RegisterComponent implements OnInit {
 
     this.formCustom = new FormGroup({});
     this.messageError = '';
+    this.errorPasswordMessage = '';
+
 
   }
 
@@ -34,9 +37,9 @@ export class RegisterComponent implements OnInit {
    */
   createForm() {
     this.formCustom = this.fb.group({
-      fullName: ['', [Validators.required]],
-      email:    ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$")]],
-      password: ['', [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?!@#$%^&*_=+-]).{8,}")]],
+      fullName: ['',  [Validators.required]],
+      email:    ['',  [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$")]],
+      password: ['',  [Validators.required]],
       repeatPassword: ['', [Validators.required]]
     }, {
       validators: [this.notEqualPasswordsValidator('password', 'repeatPassword')]
@@ -94,13 +97,17 @@ export class RegisterComponent implements OnInit {
       let errorsObj = error.error;
       
       if (errorsObj.email) {
-
         this.messageError = errorsObj.email.msg;
         this.formCustom.controls.email.setErrors({ hasErrors: true });
-        this.formCustom.controls.password.setValue('');
-        this.formCustom.controls.repeatPassword.setValue('');
-
       }
+      if (errorsObj.password) {
+        this.errorPasswordMessage = errorsObj.password.msg;
+        this.formCustom.controls.password.setErrors({ hasErrors: true });
+      }
+
+      this.formCustom.controls.password.setValue('');
+      this.formCustom.controls.repeatPassword.setValue('');
+      
     });
 
   }
