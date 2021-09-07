@@ -1,0 +1,20 @@
+@import '../../../styles/abstracts/variables';
+.category {
+    cursor: pointer;
+    padding: 2rem;
+    border-radius: .5rem;
+    transition: 300ms all;
+    width: 35rem;
+    height: 20rem;
+    overflow: hidden;
+    &__content {
+        color: $triviagame-softgray;
+    }
+    &:hover {
+        background-color: $triviagame-softblue;
+    }
+    &__image {
+        width: 7rem;
+        margin: auto;
+    }
+}

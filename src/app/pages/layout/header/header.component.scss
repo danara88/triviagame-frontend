@@ -5,6 +5,7 @@
     justify-content: center;
     padding: 2rem 0;
     background-color: $triviagame-softblue;
+    position: relative;
 }
 
 .logo {
@@ -18,5 +19,27 @@
     &__subtext {
         font-size: $font-size-14;
         color: $triviagame-softgray;
+    }
+}
+
+.user-info {
+    float: right;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 4rem;
+    cursor: pointer;
+    &__image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $green;
+        color: $triviagame-graywhite;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 5rem;
+    }
+    &__user-name {
+        margin-left: 1rem;
     }
 }

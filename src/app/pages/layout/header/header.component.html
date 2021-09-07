@@ -5,4 +5,11 @@
         <span class="logo__subtext">Powered by Daniel Aranda</span>
     </div>
 
+    <div class="user-info" *ngIf="identity">
+        <div class="user-info__image">
+            <span>{{ firstLetter}}</span>
+        </div>
+        <span class="user-info__user-name">{{ identity.fullName }}</span>
+    </div>
+
 </header>
