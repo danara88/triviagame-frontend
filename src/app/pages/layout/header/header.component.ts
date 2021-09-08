@@ -19,6 +19,9 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  /**
+   * Get the first letter of the username
+   */
   get firstLetter(): string {
     if(this.identity) {
       return this.identity?.fullName[0].toUpperCase();
@@ -27,6 +30,13 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  /**
+   * Log out user
+   */
+  logout() {
+    this.userService.logout();
   }
 
 }

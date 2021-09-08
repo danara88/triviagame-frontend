@@ -1,0 +1,27 @@
+/**
+* APP GLOBAL MODALS
+*/
+
+.modal-custom {
+
+    .modal-content {
+        background-color: $triviagame-softblue;
+        margin-top: 10rem;
+        padding: .7rem;
+    }
+
+    &__body {
+        font-size: $font-size-14;
+        color: $triviagame-softgray;
+        margin: 1rem 0rem;
+    }
+
+    &__footer {
+        button {
+            &:first-of-type {
+                margin-right: 1rem;
+            }
+        }
+    }
+
+}
