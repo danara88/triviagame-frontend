@@ -24,4 +24,11 @@
         }
     }
 
+    &.modal-custom--profile {
+        .modal-content {
+            margin: auto;
+            width: 40rem;
+        }
+    }
+
 }

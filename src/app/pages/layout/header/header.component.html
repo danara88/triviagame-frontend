@@ -11,7 +11,7 @@
         <!-- Button dropdown -->
         <div class="user-info" *ngIf="identity" id="dropdownMenuButton1" data-bs-toggle="dropdown">
             <div class="user-info__image">
-                <span>{{ firstLetter}}</span>
+                <span>{{ utilsService.firstLetter(identity.fullName) }}</span>
             </div>
             <span class="user-info__user-name">{{ identity.fullName }}</span>
         </div>
@@ -21,14 +21,14 @@
         <ul class="dropdown-menu mt-4" aria-labelledby="dropdownMenuButton1" *ngIf="identity">
             <div class="dropdown-menu__head">
                 <div class="user-info__image">
-                    <span>{{ firstLetter}}</span>
+                    <span>{{ utilsService.firstLetter(identity.fullName) }}</span>
                 </div>
                 <div class="d-flex flex-column">
                     <span class="user-info__user-name">{{ identity.fullName }}</span>
                     <span class="user-info__user-email">{{ identity.email }}</span>
                 </div>
             </div>
-            <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="#" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fas fa-user"></i>Profile</a></li>
             <li><a href="#"><i class="far fa-question-circle"></i>Support</a></li>
             <li><a href="#" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt"></i>Log out</a></li>
         </ul>
@@ -65,3 +65,5 @@
     </div>
   </div>
 <!-- Modal -->
+
+<app-profile></app-profile>

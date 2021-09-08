@@ -1,0 +1,15 @@
+@import '../../../../styles/abstracts//variables';
+
+.profile {
+    & > .user-info__image {
+        margin: auto;
+    }
+    &__content {
+        margin-top: 2rem;
+    }
+    &__group {
+        label {
+            color: $triviagame-graywhite;
+        }
+    }
+}

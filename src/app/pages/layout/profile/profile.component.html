@@ -1,0 +1,52 @@
+<!-- Modal -->
+<div class="modal fade modal-custom modal-custom--profile" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          
+            <div class="modal-custom__head">
+                Profile
+            </div>
+
+            <div class="modal-custom__body profile">
+                
+                <div class="user-info__image">
+                    <span>{{ utilsService.firstLetter(identity.fullName) }}</span>
+                </div>
+
+                <div class="profile__content">
+                    <div class="row">
+                        <div class="col-md-6">
+                           <div class="profile__group">
+                               <label>Full name</label>
+                               <p>{{ identity.fullName }}</p>
+                           </div>
+                           <div class="profile__group">
+                                <label>Email</label>
+                                <p>{{ identity.email }}</p>
+                            </div>  
+                            <div class="profile__group">
+                                <label>Account</label>
+                                <p>{{ identity.role === 'ADMIN_ROLE' ? 'Admin Account' : 'User Account' }}</p>
+                            </div>  
+                        </div>
+                        <div class="col-md-6">
+                            <div class="profile__group">
+                                <label>Account Status</label>
+                                <p>{{ identity.status === false ? 'Disavailale' : 'Active' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-custom__footer float-end">
+                <button class="btn-custom btn-custom--gray btn-custom--sm" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Modal -->
