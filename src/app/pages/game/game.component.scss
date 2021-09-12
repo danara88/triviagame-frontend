@@ -4,8 +4,8 @@
         margin-top: 5rem;
 
         &-column {
-            width: 100%;
-            margin: 0rem 1rem;
+            width: 60rem;
+            margin: 0rem auto;
 
         }
     }
@@ -39,5 +39,16 @@
         position: absolute;
         bottom: 0rem;
         width: 100%;
+    }
+}
+
+/**
+* Style when you select an answer
+*/
+.selected-answer {
+    background-color: $green;
+    color: $triviagame-graywhite;
+    &:hover {
+        opacity: 1 !important;
     }
 }

@@ -1,7 +1,9 @@
 <app-layout>
     <div class="categories d-flex justify-content-between flex-wrap mt-4">
 
-        <div class="category m-2 cursor-pointer" *ngFor="let category of categories">
+        <div class="category m-2 cursor-pointer" 
+             *ngFor="let category of categories" 
+             (click)="startsGame(category._id)">
            <div class="category__image mb-4">
                <img src="../../../assets/img/options.svg">
            </div>

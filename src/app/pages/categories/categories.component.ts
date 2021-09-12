@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
 import { CategoryService } from '../../services/category.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -14,7 +15,8 @@ export class CategoriesComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    private sponner: NgxSpinnerService
+    private sponner: NgxSpinnerService,
+    private router: Router,
   ) {
     
     this.categories = [];
@@ -38,6 +40,14 @@ export class CategoriesComponent implements OnInit {
       this.sponner.hide();
       console.log(error);
     });
+  }
+
+  /**
+   * Redirects to the game screen
+   * @param categoryID 
+   */
+  startsGame(categoryID: string) {
+    this.router.navigate(['/game', categoryID]);
   }
 
 }
