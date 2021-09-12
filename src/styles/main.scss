@@ -14,11 +14,14 @@
 
 // 4. Layout
 @import 
-  'layout/forms';
+  'layout/forms',
+  'layout/headers';
 
 // 5. Components
 @import
-  'components/btns';
+  'components/btns',
+  'components/dropdowns',
+  'components/modals';
 
 // 6. Pages
 @import 

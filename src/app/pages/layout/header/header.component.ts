@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from '../../../services/user.service';
+import { UtilsService } from '../../../services/utils.service';
 
 @Component({
   selector: 'app-header',
@@ -12,21 +13,22 @@ export class HeaderComponent implements OnInit {
   public identity: User | null;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    public utilsService: UtilsService,
   ) {
 
     this.identity = this.userService.getIdentity();
 
   }
 
-  get firstLetter(): string {
-    if(this.identity) {
-      return this.identity?.fullName[0].toUpperCase();
-    }
-    return "Error";
+  ngOnInit(): void {
   }
 
-  ngOnInit(): void {
+  /**
+   * Log out user
+   */
+  logout() {
+    this.userService.logout();
   }
 
 }

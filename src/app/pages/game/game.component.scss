@@ -1,0 +1,54 @@
+@import '../../../styles/abstracts/variables';
+.game {
+    &__options {
+        margin-top: 5rem;
+
+        &-column {
+            width: 60rem;
+            margin: 0rem auto;
+
+        }
+    }
+    &__option {
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: 300ms all;
+
+        &:hover {
+            background-color: $triviagame-softblue;
+            opacity: .7;
+
+        }
+    }
+
+    &__buttons {
+        margin-left: 2rem;
+        & > span {
+            margin: 0rem 1rem;
+            cursor: pointer;
+            transition: 300ms all;
+            &:hover {
+                opacity: .8;
+            }
+        }
+    }
+
+    &__footer {
+        background-color: #000;
+        padding: 1rem;
+        position: absolute;
+        bottom: 0rem;
+        width: 100%;
+    }
+}
+
+/**
+* Style when you select an answer
+*/
+.selected-answer {
+    background-color: $green;
+    color: $triviagame-graywhite;
+    &:hover {
+        opacity: 1 !important;
+    }
+}
