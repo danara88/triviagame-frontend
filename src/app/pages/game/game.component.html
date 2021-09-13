@@ -1,5 +1,5 @@
 <app-layout>
-    <div class="game mt-4">
+    <div class="game mt-4" *ngIf="!submittedGame">
         <div class="game__question text-center">
             <h3>Question <strong>#{{ numberQuestion }}</strong></h3>
             {{ activeQuestion.sentence }}
@@ -18,19 +18,69 @@
         </div>
     </div>
 
+
+    <div class="game-finish" *ngIf="submittedGame && grade >= 70">
+        <div class="game-finish__head d-flex flex-column align-items-center">
+            <div class="game-finish__image">
+                <img src="../../../assets/img/like.svg" alt="Good Trivia Game">
+            </div>
+            <span>You did great !</span>
+        </div>
+
+        <div class="game-finish__content d-flex flex-column align-items-center">
+            <h2>Final Results</h2>
+
+            <div class="game-finish__info d-flex flex-column align-items-center">
+                <span>You get {{ score }} points !</span>
+                <span>Game Time: 00:00:00</span>
+                <span>Total Score: {{ totalScore }}</span>
+                <span>Your score: {{ score }} / {{ totalScore }}</span>
+            </div>
+
+            <button class="btn-custom" routerLink="/home">Exit Game</button>
+        </div>
+       
+    </div>
+
+    <div class="game-finish" *ngIf="submittedGame && grade <= 70">
+        <div class="game-finish__head d-flex flex-column align-items-center">
+            <div class="game-finish__image">
+                <img src="../../../assets/img/dislike.svg" alt="Good Trivia Game">
+            </div>
+            <span>You did bad :(</span>
+        </div>
+
+        <div class="game-finish__content d-flex flex-column align-items-center">
+            <h2>Final Results</h2>
+
+            <div class="game-finish__info d-flex flex-column align-items-center">
+                <span>You get {{ score }} points</span>
+                <span>Game Time: {{ game.timeGame }}</span>
+                <span>Total Score: {{ totalScore }}</span>
+                <span>Your score: {{ score }} / {{ totalScore }}</span>
+            </div>
+
+            <button class="btn-custom" routerLink="/home">Exit Game</button>
+        </div>
+       
+    </div>
+
 </app-layout>
 
-<div class="game__footer d-flex justify-content-between">
+<div class="game__footer d-flex justify-content-between" *ngIf="!submittedGame">
     <div class="d-flex">
         <span class="game__totalquestions">{{ answeredQuestions }}/{{ totalQuestions }}</span>
     
         <div class="game__buttons">
-            <span (click)="prevQuestion()" *ngIf="numberQuestion !== 1"><i class="fas fa-arrow-left"></i> Go back</span>
-            <span (click)="nextQuestion()" *ngIf="numberQuestion <= totalQuestions - 1">Next <i class="fas fa-arrow-right"></i></span>
+            <button class="btn-custom btn-custom--sm btn-custom--gray" (click)="prevQuestion()" *ngIf="numberQuestion !== 1"><i class="fas fa-arrow-left"></i></button>
+            <button class="btn-custom btn-custom--sm btn-custom--gray" (click)="nextQuestion()" *ngIf="numberQuestion <= totalQuestions - 1"><i class="fas fa-arrow-right"></i></button>
         </div>
     </div>
 
     <span class="game__totalquestions">
+        <button class="btn-custom btn-custom--sm" 
+                *ngIf="numberQuestion === totalQuestions || answeredQuestions === totalQuestions"
+                (click)="finishGame()">Finish test</button>
         Total questions: {{ totalQuestions }}
     </span>
 </div>
