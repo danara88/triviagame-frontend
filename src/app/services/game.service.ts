@@ -22,4 +22,14 @@ export class GameService {
     return this.http.post<Game>(`${ apiUrl }/games`, { category: categoryID });
   }
 
+  /**
+   * This service will finish the game
+   * @param gameID 
+   * @param totalScore 
+   * @returns 
+   */
+  endGame(gameID: string, totalScore: number): Observable<Game> {
+    return this.http.post<Game>(`${ apiUrl }/games/end-game/${ gameID }`, { totalScore });
+  }
+
 }

@@ -23,12 +23,9 @@
 
     &__buttons {
         margin-left: 2rem;
-        & > span {
-            margin: 0rem 1rem;
-            cursor: pointer;
-            transition: 300ms all;
-            &:hover {
-                opacity: .8;
+        & > button {
+            &:first-of-type {
+                margin-right: 1rem;
             }
         }
     }
@@ -50,5 +47,30 @@
     color: $triviagame-graywhite;
     &:hover {
         opacity: 1 !important;
+    }
+}
+
+.game-finish {
+    &__head {
+        margin-top: 5rem;
+        span {
+            margin-top: 2rem;
+            font-size: $font-size-24;
+        }
+    }
+    &__info {
+        margin: 2rem;
+    }
+    &__content {
+        margin-top: 2rem;
+      
+        span {
+            color: $triviagame-softgray;
+        }
+    }
+    &__image {
+       img {
+           width: 20rem;
+       }
     }
 }

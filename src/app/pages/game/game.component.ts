@@ -22,6 +22,10 @@ export class GameComponent implements OnInit {
   public totalQuestions: number;
   public answeredQuestions: number;
   public options: any[];
+  public totalScore: number;
+  public score: number;
+  public submittedGame: boolean;
+  public grade: number;
 
   constructor(
     private gameService: GameService,
@@ -39,26 +43,46 @@ export class GameComponent implements OnInit {
     this.activeQuestion = new Question();
     this.totalQuestions = 1;
     this.answeredQuestions = 0;
+    this.totalScore = 0;
+    this.score = 0;
+    this.submittedGame = false;
+    this.grade = 0;
 
   }
 
   ngOnInit(): void {
     this.route.params.forEach((params: Params) => {
       this.categoryID = params.categoryID;
-      // this.createGame();
+      this.createGame();
       this.getGameQuestions();
     });
+  }
+
+  /**
+   * Get total score
+   * @param questions
+   * @returns 
+   */
+  private getTotalScore(questions: Question[]): number {
+    let sum = 0;
+    questions.forEach(question => sum = sum + question.score!);
+
+    return sum;
   }
 
   /**
    * This method will creates the game
    */
   createGame() {
+    this.spinner.show();
+
     this.gameService.createGame(this.categoryID).subscribe(game => {
-      console.log(game);
       this.game = game;
+      this.spinner.hide();
+
     }, error => {
       console.log(error);
+      this.spinner.hide();
       this.router.navigateByUrl('/home');
     });
   }
@@ -69,6 +93,8 @@ export class GameComponent implements OnInit {
   getGameQuestions() {
     this.questionService.getQuestionsByCategory(this.categoryID).subscribe(resp => {
       this.questions = resp.questions;
+      this.totalScore = this.getTotalScore(this.questions);
+
       if (this.questions.length === 0) this.router.navigateByUrl('/home');
       this.totalQuestions = resp.total;
       
@@ -111,7 +137,39 @@ export class GameComponent implements OnInit {
   selectedOption(optionSelected: Answer) {
     let index = this.questions.indexOf(this.activeQuestion);
     this.questions[index].selectedOption = optionSelected;
+
     this.answeredQuestions = (this.questions.filter(question => question.selectedOption)).length;
+  }
+
+  /**
+   * This method will submit the game
+   */
+  finishGame() {
+    this.questions.forEach(question => {
+      if (question.correctAnswer === question.selectedOption?._id && !this.submittedGame) {
+        this.score = this.score + question.score!;
+      }
+    });
+    this.grade = (this.score / this.totalScore) * 100;
+    this.submittedGame = true;
+
+    this.endGame();
+  }
+
+  /**
+   * Finish game
+   */
+  endGame() {
+    this.spinner.show();
+    this.gameService.endGame(this.game._id!, this.score).subscribe(game => {
+      this.spinner.hide();
+      this.game = game;
+      
+    }, error => {
+      this.spinner.hide();
+      console.log(error);
+
+    });
   }
 
 }

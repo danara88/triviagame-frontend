@@ -7,6 +7,7 @@ export class Question {
         public category?: Category | string,
         public sentence?: string,
         public options?: Answer[] | string[],
+        public correctAnswer?: Answer | string,
         public selectedOption?: Answer,
         public score?: number,
         public status?: boolean,
