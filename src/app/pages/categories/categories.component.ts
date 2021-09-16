@@ -34,8 +34,8 @@ export class CategoriesComponent implements OnInit {
     this.sponner.show();
     this.categoryService.getCategories().subscribe(resp => {
       this.categories = resp.categories;
-      console.log(this.categories);
       this.sponner.hide();
+      
     }, error => {
       this.sponner.hide();
       console.log(error);
