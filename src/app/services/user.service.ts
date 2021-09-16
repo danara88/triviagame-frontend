@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { RegisterForm, RegisterAuthResponse, LoginRequest } from '../interfaces/user';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { tap, map, catchError } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 
@@ -44,6 +45,21 @@ export class UserService {
    */
   login(data: LoginRequest): Observable<RegisterAuthResponse> {
     return this.http.post<RegisterAuthResponse>(`${ apiUrl }/auth/login`, data);
+  }
+
+  /**
+   * Validate the auth token
+   * @returns 
+   */
+  validateToken(): Observable<boolean> {
+    return this.http.post<{token: string}>(`${ apiUrl }/auth/refresh`, {})
+               .pipe(
+                 tap(resp => {
+                  localStorage.setItem('access_token', resp.token);
+                 }),
+                 map(resp => true),
+                 catchError(error => of(false))
+               );
   }
 
   /**
