@@ -3,6 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule)
   },
@@ -17,7 +22,11 @@ const routes: Routes = [
   {
     path: 'game/:categoryID',
     loadChildren: () => import('./pages/game/game.module').then(m => m.GameModule)
-  }
+  },
+  {
+    path: 'create-game',
+    loadChildren: () => import('./pages/create-game/create-game.module').then(m => m.CreateGameModule)
+  },
 ];
 
 @NgModule({

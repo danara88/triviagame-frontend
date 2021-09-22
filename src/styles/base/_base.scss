@@ -32,4 +32,10 @@ body {
         background-color: $green;
         color: $triviagame-graywhite;
     }
+
+    &__title {
+        color: $triviagame-softgray;
+        margin-bottom: 1rem;
+        font-size: $font-size-16;
+    }
 }
