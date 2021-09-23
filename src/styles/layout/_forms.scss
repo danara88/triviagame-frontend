@@ -23,6 +23,10 @@
     }
     &__group {
         position: relative;
+        &-answers {
+            display: flex;
+            justify-content: space-between;
+        }
         &--small {
             width: 49%;
         }
