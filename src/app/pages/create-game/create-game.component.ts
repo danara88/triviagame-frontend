@@ -29,8 +29,6 @@ export class CreateGameComponent implements OnInit {
 
 
 
-
-
   ngOnInit(): void {
     console.log(this.questionsForm);
   }
@@ -42,8 +40,6 @@ export class CreateGameComponent implements OnInit {
     this.formCustom = this.fb.group({
       categoryName: ['',  [Validators.required]],
       categoryDescription:    ['',  [Validators.required]],
-      password: ['',  [Validators.required]],
-      repeatPassword: ['', [Validators.required]],
       questions: this.fb.array([]),
     });
   }
@@ -70,7 +66,12 @@ export class CreateGameComponent implements OnInit {
     this.questionsForm.removeAt(i);
   }
 
-
+  /**
+   * This method will publish and save the complete category
+   */
+  onSubmit() {
+    console.log(this.formCustom.value);
+  }
 
 
 

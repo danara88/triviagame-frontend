@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { QuestionsResponse } from '../interfaces/question';
+import { QuestionsResponse, CreateNewQuestion } from '../interfaces/question';
+import { Question } from '../models/question.model';
 
 const apiUrl = environment.API_URL;
 
@@ -19,6 +20,15 @@ export class QuestionService {
    */
   getQuestionsByCategory(categoryID: string): Observable<QuestionsResponse> {
     return this.http.get<QuestionsResponse>(`${ apiUrl }/questions/questions-by-category/${ categoryID }`);
+  }
+
+  /**
+   * Create new question
+   * @param question 
+   * @returns 
+   */
+  createQuestion(question: CreateNewQuestion): Observable<Question> {
+    return this.http.post<CreateNewQuestion>(`${ apiUrl }/questions`, question);
   }
 
 }
