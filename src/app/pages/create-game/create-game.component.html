@@ -40,52 +40,187 @@
 
                     <div class="col-md-6 mb-5">
                         <div class="box">
-                            <h3 class="box__title">Create questions and answers</h3>
-                            <button type="button" class="btn-custom btn-custom--large" 
-                                    (click)="addQuestion()">Add question</button>
+                            <h3 class="box__title">Create your 5 questions and answers</h3>
 
-                            <!-- Quesion -->
-                            <div formArrayName="questions">
-                                <div class="form-custom__group d-flex flex-column mt-3"
-                                    *ngFor="let control of questionsForm.controls; let i = index">
-                                    <div class="d-flex justify-content-between">
-                                        <label class="form-custom__label mb-2">Question {{ i + 1 }}</label>
-                                        <i *ngIf="i >= 3" 
-                                            (click)="removeQuestion(i)"
-                                            class="fas fa-times cursor-pointer" 
-                                            style="color: #979EA2"></i>
-                                    </div>
-                                
-                                    <input  type="text" 
-                                            class="form-custom__input" 
-                                            placeholder="Write here your question"
-                                            [formControlName]="i">
+                            <!-- Question 1 -->
+                            <div class="form-custom__group d-flex flex-column mt-3">
 
-                                    <!-- Answers -->
-                                    <div class="form-custom__group-answers mt-3">
-                                        <div>
-                                            <input type="text" 
-                                                class="form-custom__input" 
-                                                placeholder="a)">
-                                            <input type="text" 
-                                                class="form-custom__input mt-3" 
-                                                placeholder="b)">
-                                        </div>
-
-                                        <div>
-                                            <input type="text" 
-                                                class="form-custom__input" 
-                                                placeholder="c)">
-                                            <input type="text" 
-                                                class="form-custom__input mt-3" 
-                                                placeholder="d)">
-                                        </div>
-                                    </div>
-                                    <!-- Answers -->
-
+                                <div class="d-flex justify-content-between">
+                                    <label class="form-custom__label mb-2">Enter your question</label>
                                 </div>
+
+                                <input  type="text" 
+                                        class="form-custom__input" 
+                                        formControlName="question1">
+                            
+                                <!-- Answers -->
+                                <div class="form-custom__group-answers mt-3">
+                                    <div>
+                                        <input type="text" 
+                                            class="form-custom__input" 
+                                            placeholder="a)">
+                                        <input type="text" 
+                                            class="form-custom__input mt-3" 
+                                            placeholder="b)">
+                                    </div>
+
+                                    <div>
+                                        <input type="text" 
+                                            class="form-custom__input" 
+                                            placeholder="c)">
+                                        <input type="text" 
+                                            class="form-custom__input mt-3" 
+                                            placeholder="d)">
+                                    </div>
+                                </div>
+                                <!-- Answers -->
+
                             </div>
-                            <!-- Quesion -->
+                            <!-- Question 1-->
+
+                            <!-- Question 2 -->
+                            <div class="form-custom__group d-flex flex-column mt-3">
+
+                                <div class="d-flex justify-content-between">
+                                    <label class="form-custom__label mb-2">Enter your question</label>
+                                </div>
+
+                                <input  type="text" 
+                                        class="form-custom__input" 
+                                        formControlName="question1">
+                            
+                                <!-- Answers -->
+                                <div class="form-custom__group-answers mt-3">
+                                    <div>
+                                        <input type="text" 
+                                            class="form-custom__input" 
+                                            placeholder="a)">
+                                        <input type="text" 
+                                            class="form-custom__input mt-3" 
+                                            placeholder="b)">
+                                    </div>
+
+                                    <div>
+                                        <input type="text" 
+                                            class="form-custom__input" 
+                                            placeholder="c)">
+                                        <input type="text" 
+                                            class="form-custom__input mt-3" 
+                                            placeholder="d)">
+                                    </div>
+                                </div>
+                                <!-- Answers -->
+
+                            </div>
+                            <!-- Question 2 -->
+
+                            <!-- Question 3 -->
+                            <div class="form-custom__group d-flex flex-column mt-3">
+
+                                <div class="d-flex justify-content-between">
+                                    <label class="form-custom__label mb-2">Enter your question</label>
+                                </div>
+
+                                <input  type="text" 
+                                        class="form-custom__input" 
+                                        formControlName="question1">
+                            
+                                <!-- Answers -->
+                                <div class="form-custom__group-answers mt-3">
+                                    <div>
+                                        <input type="text" 
+                                            class="form-custom__input" 
+                                            placeholder="a)">
+                                        <input type="text" 
+                                            class="form-custom__input mt-3" 
+                                            placeholder="b)">
+                                    </div>
+
+                                    <div>
+                                        <input type="text" 
+                                            class="form-custom__input" 
+                                            placeholder="c)">
+                                        <input type="text" 
+                                            class="form-custom__input mt-3" 
+                                            placeholder="d)">
+                                    </div>
+                                </div>
+                                <!-- Answers -->
+
+                            </div>
+                            <!-- Question 3 -->
+
+                            <!-- Question 4 -->
+                            <div class="form-custom__group d-flex flex-column mt-3">
+
+                                <div class="d-flex justify-content-between">
+                                    <label class="form-custom__label mb-2">Enter your question</label>
+                                </div>
+
+                                <input  type="text" 
+                                        class="form-custom__input" 
+                                        formControlName="question1">
+                            
+                                <!-- Answers -->
+                                <div class="form-custom__group-answers mt-3">
+                                    <div>
+                                        <input type="text" 
+                                            class="form-custom__input" 
+                                            placeholder="a)">
+                                        <input type="text" 
+                                            class="form-custom__input mt-3" 
+                                            placeholder="b)">
+                                    </div>
+
+                                    <div>
+                                        <input type="text" 
+                                            class="form-custom__input" 
+                                            placeholder="c)">
+                                        <input type="text" 
+                                            class="form-custom__input mt-3" 
+                                            placeholder="d)">
+                                    </div>
+                                </div>
+                                <!-- Answers -->
+
+                            </div>
+                            <!-- Question 4 -->
+
+                            <!-- Question 5 -->
+                            <div class="form-custom__group d-flex flex-column mt-3">
+
+                                <div class="d-flex justify-content-between">
+                                    <label class="form-custom__label mb-2">Enter your question</label>
+                                </div>
+
+                                <input  type="text" 
+                                        class="form-custom__input" 
+                                        formControlName="question1">
+                            
+                                <!-- Answers -->
+                                <div class="form-custom__group-answers mt-3">
+                                    <div>
+                                        <input type="text" 
+                                            class="form-custom__input" 
+                                            placeholder="a)">
+                                        <input type="text" 
+                                            class="form-custom__input mt-3" 
+                                            placeholder="b)">
+                                    </div>
+
+                                    <div>
+                                        <input type="text" 
+                                            class="form-custom__input" 
+                                            placeholder="c)">
+                                        <input type="text" 
+                                            class="form-custom__input mt-3" 
+                                            placeholder="d)">
+                                    </div>
+                                </div>
+                                <!-- Answers -->
+
+                            </div>
+                            <!-- Question 5 -->
 
                         </div>
                     </div>

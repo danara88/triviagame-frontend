@@ -1,19 +1,48 @@
 <app-layout>
     <div class="categories d-flex justify-content-between flex-wrap mt-4">
 
-        <div class="category m-2 cursor-pointer" 
-             *ngFor="let category of categories" 
-             (click)="startsGame(category._id)">
-           <div class="category__image mb-4">
-               <img src="assets/img/options.svg">
-           </div>
-           <div class="category__head">
-               <h3 class="text-center">{{ category.name }}</h3>
-           </div>
-           <div class="category__content text-center">
-               {{ category.description }}
-           </div>
-        </div>
+        <div *ngFor="let category of categories; let i = index" >
+            
+            <div class="category m-2 cursor-pointer" (click)="showModal(category._id)">
 
+                <div class="category__image mb-4">
+                    <img src="assets/img/options.svg">
+                </div>
+
+                <div class="category__head">
+                    <h3 class="text-center">{{ category.name }}</h3>
+                </div>
+
+                <div class="category__content text-center">
+                    {{ category.description }}
+                </div>
+            </div>
+            
+            <!-- Modal -->
+            <div id="{{ category._id }}" class="w3-modal modal-custom">
+                <div class="w3-modal-content">
+                    <div class="w3-container">
+                        
+                        <div class="w3-container__header">
+                            {{ category.name }}
+                        </div>
+                        <div class="w3-container__body">
+                            <span>Are you sure you want to start this game ?</span>
+                            <p class="mt-3">
+                                <b>Game description:</b>
+                                {{ category.description }}
+                            </p>
+                        </div>
+                        <div class="w3-container__footer">
+                            <button class="btn-custom  btn-custom--sm" (click)="startGame(category._id)">Yes, let's play !</button>
+                            <button class="btn-custom btn-custom--gray btn-custom--sm" (click)="dismissModal(category._id)">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+
+        </div>
     </div>
 </app-layout>

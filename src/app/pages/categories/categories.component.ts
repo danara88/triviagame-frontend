@@ -46,8 +46,19 @@ export class CategoriesComponent implements OnInit {
    * Redirects to the game screen
    * @param categoryID 
    */
-  startsGame(categoryID: string) {
+  startGame(categoryID: string) {
     this.router.navigate(['/game', categoryID]);
   }
+
+
+  showModal(categoryId: string) {
+    document.getElementById(categoryId)!.style.display='block';
+  }
+
+  dismissModal(categoryId: string) {
+    document.getElementById(categoryId)!.style.display='none';
+  }
+
+  
 
 }

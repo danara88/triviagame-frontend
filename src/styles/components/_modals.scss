@@ -1,7 +1,7 @@
 /**
 * APP GLOBAL MODALS
+* BOOTSRAP MODAL
 */
-
 .modal-custom {
 
     .modal-content {
@@ -31,4 +31,41 @@
         }
     }
 
+}
+
+
+/**
+* W3 MODAL
+*/
+.modal-custom {
+    .w3-modal-content {
+        background-color: $triviagame-softblue;
+        width: 40rem;
+    }
+    .w3-container {
+        background-color: $triviagame-softblue;
+        margin-top: 10rem;
+        padding: .7rem;
+
+        &__header,
+        &__body,
+        &__footer {
+            padding: 0.5rem;
+        }
+
+        &__body {
+            font-size: $font-size-14;
+            color: $triviagame-softgray;
+        }
+
+        &__footer {
+            display: flex;
+            justify-content: flex-end;
+            button {
+                &:first-of-type {
+                    margin-right: .5rem;
+                }
+            }
+        }
+    }
 }
