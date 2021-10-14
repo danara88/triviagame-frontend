@@ -54,23 +54,29 @@
                                         formControlName="question1">
                             
                                 <!-- Answers -->
-                                <div class="form-custom__group-answers mt-3">
-                                    <div>
-                                        <input type="text" 
-                                            class="form-custom__input" 
-                                            placeholder="a)">
-                                        <input type="text" 
-                                            class="form-custom__input mt-3" 
-                                            placeholder="b)">
-                                    </div>
-
-                                    <div>
-                                        <input type="text" 
-                                            class="form-custom__input" 
-                                            placeholder="c)">
-                                        <input type="text" 
-                                            class="form-custom__input mt-3" 
-                                            placeholder="d)">
+                                <div formArrayName="question1Answers">
+                                    <div class="form-custom__group-answers mt-3">
+                                        <div>
+                                            <input  type="text" 
+                                                    class="form-custom__input" 
+                                                    placeholder="a)"
+                                                    formControlName="1">
+                                            <input  type="text" 
+                                                    class="form-custom__input mt-3" 
+                                                    placeholder="b)"
+                                                    formControlName="2">
+                                        </div>
+    
+                                        <div>
+                                            <input  type="text" 
+                                                    class="form-custom__input" 
+                                                    placeholder="c)"
+                                                    formControlName="3">
+                                            <input  type="text" 
+                                                    class="form-custom__input mt-3" 
+                                                    placeholder="d)"
+                                                    formControlName="4">
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- Answers -->
@@ -87,7 +93,7 @@
 
                                 <input  type="text" 
                                         class="form-custom__input" 
-                                        formControlName="question1">
+                                        formControlName="question2">
                             
                                 <!-- Answers -->
                                 <div class="form-custom__group-answers mt-3">
@@ -123,7 +129,7 @@
 
                                 <input  type="text" 
                                         class="form-custom__input" 
-                                        formControlName="question1">
+                                        formControlName="question3">
                             
                                 <!-- Answers -->
                                 <div class="form-custom__group-answers mt-3">
@@ -159,7 +165,7 @@
 
                                 <input  type="text" 
                                         class="form-custom__input" 
-                                        formControlName="question1">
+                                        formControlName="question4">
                             
                                 <!-- Answers -->
                                 <div class="form-custom__group-answers mt-3">
@@ -195,7 +201,7 @@
 
                                 <input  type="text" 
                                         class="form-custom__input" 
-                                        formControlName="question1">
+                                        formControlName="question5">
                             
                                 <!-- Answers -->
                                 <div class="form-custom__group-answers mt-3">

@@ -14,4 +14,5 @@ export interface QuestionsResponse {
 export interface CreateNewQuestion {
     sentence: string,
     category: string,
+    score?: number
 }

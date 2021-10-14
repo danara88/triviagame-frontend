@@ -15,7 +15,7 @@ export class CategoriesComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    private sponner: NgxSpinnerService,
+    private spinner: NgxSpinnerService,
     private router: Router,
   ) {
     
@@ -31,13 +31,13 @@ export class CategoriesComponent implements OnInit {
    * Get all categories
    */
   getCategories() {
-    this.sponner.show();
+    this.spinner.show();
     this.categoryService.getCategories().subscribe(resp => {
       this.categories = resp.categories;
-      this.sponner.hide();
+      this.spinner.hide();
       
     }, error => {
-      this.sponner.hide();
+      this.spinner.hide();
       console.log(error);
     });
   }

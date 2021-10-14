@@ -3,7 +3,7 @@
 
         <div *ngFor="let category of categories; let i = index" >
             
-            <div class="category m-2 cursor-pointer" (click)="showModal(category._id)">
+            <div class="category m-2 cursor-pointer" (click)="showModal(category._id!)">
 
                 <div class="category__image mb-4">
                     <img src="assets/img/options.svg">
@@ -34,8 +34,8 @@
                             </p>
                         </div>
                         <div class="w3-container__footer">
-                            <button class="btn-custom  btn-custom--sm" (click)="startGame(category._id)">Yes, let's play !</button>
-                            <button class="btn-custom btn-custom--gray btn-custom--sm" (click)="dismissModal(category._id)">Cancel</button>
+                            <button class="btn-custom  btn-custom--sm" (click)="startGame(category._id!)">Yes, let's play !</button>
+                            <button class="btn-custom btn-custom--gray btn-custom--sm" (click)="dismissModal(category._id!)">Cancel</button>
                         </div>
 
                     </div>

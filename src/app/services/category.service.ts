@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CategoriesResp, CreateNewCategory } from '../interfaces/category';
 import { Observable } from 'rxjs';
+import { Category } from '../models/category.model';
 
 const apiUrl = environment.API_URL;
 
@@ -24,8 +25,8 @@ export class CategoryService {
   /**
    * Creates a new category
    */
-  CreateCategory(createNewCategory: CreateNewCategory): Observable<any> {
-    return this.http.post<CreateNewCategory>(`${ apiUrl }/categories`, createNewCategory);
+  createCategory(createNewCategory: CreateNewCategory): Observable<Category> {
+    return this.http.post<Category>(`${ apiUrl }/categories`, createNewCategory);
   }
 
 }
