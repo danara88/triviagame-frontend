@@ -10,13 +10,17 @@
         <div class="modal-body">
           
             <div class="modal-custom__head">
-                Profile
+                My Profile
             </div>
 
             <div class="modal-custom__body profile">
                 
                 <div class="user-info__image">
                     <span>{{ utilsService.firstLetter(identity.fullName) }}</span>
+                </div>
+
+                <div class="profile__head">
+                    <p>Here, you will find all your profile information. Sensitive information will not be displayed.</p>
                 </div>
 
                 <div class="profile__content">
@@ -30,16 +34,16 @@
                                 <label>Email</label>
                                 <p>{{ identity.email }}</p>
                             </div>  
-                            <div class="profile__group">
-                                <label>Account</label>
-                                <p>{{ identity.role === 'ADMIN_ROLE' ? 'Admin Account' : 'User Account' }}</p>
-                            </div>  
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 ml-3">
                             <div class="profile__group">
                                 <label>Account Status</label>
                                 <p>{{ identity.status === false ? 'Disavailale' : 'Active' }}</p>
                             </div>
+                            <div class="profile__group">
+                                <label>Account</label>
+                                <p>{{ identity.role === 'ADMIN_ROLE' ? 'Admin Account' : 'User Account' }}</p>
+                            </div>  
                         </div>
                     </div>
                 </div>
