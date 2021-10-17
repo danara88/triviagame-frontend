@@ -7,6 +7,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CreateNewQuestion } from '../../interfaces/question';
 import { QuestionService } from '../../services/question.service';
 import { Question } from 'src/app/models/question.model';
+import { AnswerService } from '../../services/answer.service';
+import { CreateAnswer } from '../../interfaces/answer';
+import { Answer } from 'src/app/models/answer.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-game',
@@ -19,11 +23,14 @@ export class CreateGameComponent implements OnInit {
   public status: string;
   public alertMessage: string;
   public category: Category;
+  public questionsIDs: string[];
 
   constructor(
     private fb: FormBuilder,
     private categoryService: CategoryService,
     private questionService: QuestionService,
+    private answerService: AnswerService,
+    private router: Router,
     private spinner: NgxSpinnerService,
   ) { 
 
@@ -32,10 +39,10 @@ export class CreateGameComponent implements OnInit {
     this.status = '';
     this.alertMessage = '';
     this.category = new Category();
+    this.questionsIDs = [];
   }
 
   ngOnInit() {
-    this.loadData();
   }
 
   /**
@@ -52,34 +59,49 @@ export class CreateGameComponent implements OnInit {
       question4:  ['',  [Validators.required]],
       question5:  ['',  [Validators.required]],
 
-      question1Answers: this.fb.array([]),
-      question2Answers: [[], [Validators.required]],
-      question3Answers: [[], [Validators.required]],
-      question4Answers: [[], [Validators.required]],
-      question5Answers: [[], [Validators.required]],
+      question1Answers: this.fb.group({
+        answer1: ['', [Validators.required]],
+        answer2: ['', [Validators.required]],
+        answer3: ['', [Validators.required]],
+        answer4: ['', [Validators.required]],
+      }),
+      question2Answers: this.fb.group({
+        answer1: ['', [Validators.required]],
+        answer2: ['', [Validators.required]],
+        answer3: ['', [Validators.required]],
+        answer4: ['', [Validators.required]],
+      }),
+      question3Answers: this.fb.group({
+        answer1: ['', [Validators.required]],
+        answer2: ['', [Validators.required]],
+        answer3: ['', [Validators.required]],
+        answer4: ['', [Validators.required]],
+      }),
+      question4Answers: this.fb.group({
+        answer1: ['', [Validators.required]],
+        answer2: ['', [Validators.required]],
+        answer3: ['', [Validators.required]],
+        answer4: ['', [Validators.required]],
+      }),
+      question5Answers: this.fb.group({
+        answer1: ['', [Validators.required]],
+        answer2: ['', [Validators.required]],
+        answer3: ['', [Validators.required]],
+        answer4: ['', [Validators.required]],
+      }),
 
     });
-  }
-
-  get question1Answers() {
-    return this.formCustom.get('question1Answers') as FormArray;
-  }
-
-  loadData() {
-    ['answer1', 'answer2', 'answer3', 'answer4'].forEach(value => this.question1Answers.push(this.fb.control(value)));
   }
 
   /**
    * This method will publish and save the complete category
    */
   async onSubmit() {
-    if(this.formCustom.invalid) {
-      console.log(this.formCustom.controls.question1Answers);
-      return;
-    }
+    if(this.formCustom.invalid) return;
+
     this.spinner.show();
 
-    // Create the category
+    // -- CREATES CATEGORY
     const category: CreateNewCategory = {
       name: this.formCustom.controls.categoryName.value,
       description: this.formCustom.controls.categoryDescription.value
@@ -96,7 +118,7 @@ export class CreateGameComponent implements OnInit {
       return;
     }
 
-    // Create questions
+    // -- CREATE QUESTIONS AND ANSWERS
     let questionsContent: string[] = [
       this.formCustom.controls.question1.value,
       this.formCustom.controls.question2.value,
@@ -105,15 +127,66 @@ export class CreateGameComponent implements OnInit {
       this.formCustom.controls.question5.value,
     ];
 
-    questionsContent.forEach(async (question) => {
+    let question1AnswersValues: string[] = Object.values(this.formCustom.controls.question1Answers.value);
+    let question2AnswersValues: string[] = Object.values(this.formCustom.controls.question2Answers.value);
+    let question3AnswersValues: string[] = Object.values(this.formCustom.controls.question3Answers.value);
+    let question4AnswersValues: string[] = Object.values(this.formCustom.controls.question4Answers.value);
+    let question5AnswersValues: string[] = Object.values(this.formCustom.controls.question5Answers.value);
+
+    questionsContent.forEach(async (question, i: Number) => {
       try {
         let createQuestion: Question = await this.createQuestion(question, this.category._id!, 10);
-        console.log(createQuestion);
+
+        switch(i) {
+          case 0:
+            this.saveAnswers(question1AnswersValues, createQuestion);      
+          break;
+        
+          case 1:
+            this.saveAnswers(question2AnswersValues, createQuestion);
+          break;
+
+          case 2:
+            this.saveAnswers(question3AnswersValues, createQuestion);
+          break;
+
+          case 3:
+            this.saveAnswers(question4AnswersValues, createQuestion);        
+          break;
+
+          case 4:
+            this.saveAnswers(question5AnswersValues, createQuestion);
+          break;
+        }
+      
+
       } catch (error) {
+        console.log(error);
+        this.spinner.hide();
+        return;
+      }
+    });
+  
+    this.spinner.hide();
+    this.formCustom.reset();
+    this.router.navigateByUrl('/home');
+  
+  }
+
+  /**
+   * This methos will upload the answers
+   * @param answerValues 
+   * @param questionNumber 
+   */
+  saveAnswers(answerValues: string[], question: Question) {
+    answerValues.forEach(async (answerContent) => {
+      try {
+        await this.createAnswer(answerContent, question._id!);
+      } catch(error) {
+        this.spinner.hide();
         console.log(error);
       }
     });
-
   }
 
   /**
@@ -143,7 +216,8 @@ export class CreateGameComponent implements OnInit {
       sentence: questionContent,
       category: categoryId,
       score
-    }
+    };
+
     return new Promise((resolve, reject) => {
       this.questionService.createQuestion(question).subscribe(question => {
         resolve(question);
@@ -153,6 +227,25 @@ export class CreateGameComponent implements OnInit {
     });
   }
 
+  /**
+   * This method will create an answer
+   * @param content 
+   * @param questionId 
+   * @returns 
+   */
+  private async createAnswer(content: string, questionId: string): Promise<Answer> {
+    let answer: CreateAnswer = {
+      content,
+      question: questionId
+    };
 
+    return new Promise((resolve, reject) => {
+      this.answerService.createAnswer(answer).subscribe(answer => {
+        resolve(answer);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 
 }
