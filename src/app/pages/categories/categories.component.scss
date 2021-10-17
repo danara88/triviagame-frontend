@@ -1,4 +1,5 @@
 @import '../../../styles/abstracts/variables';
+
 .category {
     cursor: pointer;
     padding: 2rem;
@@ -16,5 +17,33 @@
     &__image {
         width: 7rem;
         margin: auto;
+    }
+}
+
+.drawing-background {
+    margin: 8rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__image {
+        width: 7rem;
+        > img {
+            width: 100%;
+            vertical-align: top;
+        }
+    }
+    &__content {
+        color: $triviagame-softgray;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &-title {
+            font-weight: $font-weight-bold;
+            font-size: $font-size-20;
+        }
+        &-description {
+            width: 30rem;
+            text-align: center;
+        }
     }
 }

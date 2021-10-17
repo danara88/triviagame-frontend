@@ -44,5 +44,18 @@
             <!-- Modal -->
 
         </div>
+
+        <!-- Drawing empty categories -->
+        <div class="drawing-background" *ngIf="categories.length === 0">
+            <div class="drawing-background__image">
+                <img src="../../../assets/img/box.png">
+            </div>
+            <div class="drawing-background__content">
+                <span class="drawing-background__content-title">Whoops !</span>
+                <p class="drawing-background__content-description">There is not games to show. Here, there will be listed all the available categories that you can play !</p>
+            </div>
+        </div>
+        <!-- Drawing empty categories -->
+
     </div>
 </app-layout>
