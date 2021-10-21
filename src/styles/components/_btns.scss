@@ -19,6 +19,40 @@
     &.btn-custom--gray {
         background-color: $triviagame-darkblue;
         color: $triviagame-graywhite;
+        background-position: center;
+        transition: background 500ms;
+
+        &:hover {
+            background-color: #1e2830;
+            background-image: radial-gradient(circle, transparent 1%, #1e2830 1%);
+            background-position: center;
+            background-size: 15000%;
+        }
+
+        &:active {
+            transition: background 0s;
+            background-color: $triviagame-darkblue;
+            background-size: 100%;
+        }
+    }
+
+    &.btn-custom--blue {
+        background-position: center;
+        transition: background 500ms;
+        background-color: $blue;
+
+        &:hover {
+            background-color: #2893E0;
+            background-image: radial-gradient(circle, transparent 1%, #2893E0 1%);
+            background-position: center;
+            background-size: 15000%;
+        }
+
+        &:active {
+            transition: background 0s;
+            background-color: $blue;
+            background-size: 100%;
+        }
     }
 
     &.btn-custom--sm {
