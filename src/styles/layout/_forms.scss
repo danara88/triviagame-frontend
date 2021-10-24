@@ -23,9 +23,25 @@
     }
     &__group {
         position: relative;
+        &-answer {
+            display: flex;
+            .form-custom__group-letter {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 3rem;
+                border-radius: .5rem 0rem 0rem .5rem;
+                cursor: pointer;
+            }
+            input {
+                width: 90%;
+            }
+        }
         &-answers {
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
+            width: 100%;
         }
         &--small {
             width: 49%;

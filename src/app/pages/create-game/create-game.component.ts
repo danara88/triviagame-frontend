@@ -24,6 +24,7 @@ export class CreateGameComponent implements OnInit {
   public alertMessage: string;
   public category: Category;
   public questionsIDs: string[];
+  public selectedCorrectAnswers: any;
 
   constructor(
     private fb: FormBuilder,
@@ -40,6 +41,13 @@ export class CreateGameComponent implements OnInit {
     this.alertMessage = '';
     this.category = new Category();
     this.questionsIDs = [];
+    this.selectedCorrectAnswers = {
+      question1: null,
+      question2: null,
+      question3: null,
+      question4: null,
+      question5: null
+    }
   }
 
   ngOnInit() {
@@ -97,7 +105,8 @@ export class CreateGameComponent implements OnInit {
    * This method will publish and save the complete category
    */
   async onSubmit() {
-    if(this.formCustom.invalid) return;
+    // Don't submit if the form is invalid and if there is one not selected correct answer
+    if(this.formCustom.invalid || Object.values(this.selectedCorrectAnswers).includes(null)) return;
 
     this.spinner.show();
 
@@ -139,23 +148,23 @@ export class CreateGameComponent implements OnInit {
 
         switch(i) {
           case 0:
-            this.saveAnswers(question1AnswersValues, createQuestion);      
+            this.saveAnswers(question1AnswersValues, createQuestion, 1);      
           break;
         
           case 1:
-            this.saveAnswers(question2AnswersValues, createQuestion);
+            this.saveAnswers(question2AnswersValues, createQuestion, 2);
           break;
 
           case 2:
-            this.saveAnswers(question3AnswersValues, createQuestion);
+            this.saveAnswers(question3AnswersValues, createQuestion, 3);
           break;
 
           case 3:
-            this.saveAnswers(question4AnswersValues, createQuestion);        
+            this.saveAnswers(question4AnswersValues, createQuestion, 4);        
           break;
 
           case 4:
-            this.saveAnswers(question5AnswersValues, createQuestion);
+            this.saveAnswers(question5AnswersValues, createQuestion, 5);
           break;
         }
       
@@ -178,15 +187,87 @@ export class CreateGameComponent implements OnInit {
    * @param answerValues 
    * @param questionNumber 
    */
-  saveAnswers(answerValues: string[], question: Question) {
-    answerValues.forEach(async (answerContent) => {
+  saveAnswers(answerValues: string[], question: Question, questionNumber: number) {
+    answerValues.forEach(async (answerContent, index) => {
       try {
-        await this.createAnswer(answerContent, question._id!);
+        let answer: Answer = await this.createAnswer(answerContent, question._id!);
+        this.mappCorrectAnswer(questionNumber, index, answer, question);
+
       } catch(error) {
         this.spinner.hide();
         console.log(error);
+
       }
     });
+  }
+
+  /**
+   *
+   * @param letter 
+   */
+  async mappCorrectAnswer(questionNumber: number, iteratorAnswers: number, answer: Answer, question: Question) {
+    switch(questionNumber) {
+      case 1:
+        // For question 1
+        if (iteratorAnswers === this.selectedCorrectAnswers.question1) {
+          let correctAnswerId = answer._id;
+          await this.assignCorrectAnswer(question._id!, correctAnswerId);
+        }
+      break;
+      case 2:
+        // For question 2
+        if (iteratorAnswers === this.selectedCorrectAnswers.question2) {
+          let correctAnswerId = answer._id;
+          await this.assignCorrectAnswer(question._id!, correctAnswerId);
+        }
+      break;
+      case 3:
+        // For question 3
+        if (iteratorAnswers === this.selectedCorrectAnswers.question3) {
+          let correctAnswerId = answer._id;
+          await this.assignCorrectAnswer(question._id!, correctAnswerId);
+        }
+      break;
+      case 4:
+        // For question 4
+        if (iteratorAnswers === this.selectedCorrectAnswers.question4) {
+          let correctAnswerId = answer._id;
+          await this.assignCorrectAnswer(question._id!, correctAnswerId);
+        }
+      break;
+      case 5:
+        // For question 5
+        if (iteratorAnswers === this.selectedCorrectAnswers.question5) {
+          let correctAnswerId = answer._id;
+          await this.assignCorrectAnswer(question._id!, correctAnswerId);
+        }
+      break;
+    }
+  }
+
+  /**
+   * This method will save the correct answer
+   * @param questionNumber 
+   * @param letter 
+   */
+  selectCorrectAnswer(questionNumber: number, answerPosition: number) {
+    switch(questionNumber) {
+      case 1:
+        this.selectedCorrectAnswers.question1 = answerPosition;
+      break;
+      case 2:
+        this.selectedCorrectAnswers.question2 = answerPosition;
+      break;
+      case 3:
+        this.selectedCorrectAnswers.question3 = answerPosition;
+      break;
+      case 4:
+        this.selectedCorrectAnswers.question4 = answerPosition;
+      break;
+      case 5:
+        this.selectedCorrectAnswers.question5 = answerPosition;
+      break;
+    }
   }
 
   /**
@@ -240,9 +321,26 @@ export class CreateGameComponent implements OnInit {
     };
 
     return new Promise((resolve, reject) => {
-      this.answerService.createAnswer(answer).subscribe(answer => {
-        resolve(answer);
+      this.answerService.createAnswer(answer).subscribe(resp => {
+        resolve(resp.answer);
       }, error => {
+        reject(error);
+      });
+    });
+  }
+
+  /**
+   * This method will assign the correct answer to a question
+   * @param questionId 
+   * @param answerId 
+   * @returns 
+   */
+  private async assignCorrectAnswer(questionId: string, answerId: string): Promise<Question> {
+    return new Promise((resolve, reject) => {
+      this.questionService.assignCorrectAnswer(questionId, answerId).subscribe(question => {
+        resolve(question);
+      }, error => {
+        console.log(error);
         reject(error);
       });
     });

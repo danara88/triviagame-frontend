@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Answer } from '../models/answer.model';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { CreateAnswer } from '../interfaces/answer';
+import { CreateAnswer, CreateAnswerResp } from '../interfaces/answer';
 
 const apiUrl = environment.API_URL;
 
@@ -19,8 +19,8 @@ export class AnswerService {
    * @param createAnswer 
    * @returns 
    */
-  createAnswer(createAnswer: CreateAnswer): Observable<Answer> {
-    return this.http.post<Answer>(`${ apiUrl }/answers`, createAnswer);
+  createAnswer(createAnswer: CreateAnswer): Observable<CreateAnswerResp> {
+    return this.http.post<CreateAnswerResp>(`${ apiUrl }/answers`, createAnswer);
   }
 
 }

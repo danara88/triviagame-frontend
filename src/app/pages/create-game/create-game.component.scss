@@ -4,3 +4,8 @@
     width: 100rem;
     margin: 0 auto;
 }
+
+.selected-correct-answer {
+    background-color: $blue;
+    color: $triviagame-graywhite;
+}

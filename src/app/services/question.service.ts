@@ -31,4 +31,17 @@ export class QuestionService {
     return this.http.post<CreateNewQuestion>(`${ apiUrl }/questions`, question);
   }
 
+  /**
+   * This method will assign the correct answer to a question
+   * @param questionId 
+   * @param answerId 
+   * @returns 
+   */
+  assignCorrectAnswer(questionId: string, answerId: string): Observable<Question> {
+    let params = {
+      answer: answerId
+    }
+    return this.http.put<Question>(`${ apiUrl }/questions/question-assign-correctanswer/${ questionId }`, params);
+  }
+
 }
