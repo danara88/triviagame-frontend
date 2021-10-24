@@ -18,8 +18,8 @@
         </div>
     </div>
 
-
-    <div class="game-finish" *ngIf="submittedGame && grade >= 70">
+    <!-- Great grade -->
+    <div class="game-finish" *ngIf="submittedGame && grade >= 60">
         <div class="game-finish__head d-flex flex-column align-items-center">
             <div class="game-finish__image">
                 <img src="../../../assets/img/like.svg" alt="Good Trivia Game">
@@ -41,8 +41,10 @@
         </div>
        
     </div>
+    <!-- Great grade -->
 
-    <div class="game-finish" *ngIf="submittedGame && grade <= 70">
+    <!-- Bad grade -->
+    <div class="game-finish" *ngIf="submittedGame && grade < 60">
         <div class="game-finish__head d-flex flex-column align-items-center">
             <div class="game-finish__image">
                 <img src="../../../assets/img/dislike.svg" alt="Good Trivia Game">
@@ -64,6 +66,7 @@
         </div>
        
     </div>
+    <!-- Bad grade -->
 
 </app-layout>
 
