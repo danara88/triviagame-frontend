@@ -1,0 +1,56 @@
+/**
+ * Main styles for TOAST MESSAGES
+*/
+
+@import '../abstracts/variables';
+
+.p-toast {
+    &-summary {
+        font-size: $font-size-18;
+        color: $triviagame-graywhite;
+    }
+    &-detail {
+        font-size: $font-size-16;
+        color: $triviagame-graywhite;
+    }
+
+    .p-toast {
+        &.p-toast-message-error {
+            border: none;
+        }
+    }
+
+    .p-toast-message.p-toast-message-error {
+        background-color: #E51C24;
+        opacity: 1;
+    }
+
+    .p-toast-message .p-toast-icon-close {
+        margin-top: 1.6rem;
+    }
+
+    .p-toast-message.p-toast-message-success {
+        border: none;
+        background-color: #4CB050;
+    }
+
+    .p-toast-message .p-toast-message-content .p-toast-message-icon {
+        display: none;
+    }
+}
+
+.p-toast-message-icon.pi.pi-times-circle {
+    display: none;
+}
+
+.p-toast-message-error.p-toast-message, .p-toast .p-toast-message.p-toast-message-success{
+    width: 40rem;
+}  
+
+button.p-ripple.p-element.p-toast-icon-close.ng-star-inserted {
+    color: $triviagame-graywhite;
+}
+
+span.p-toast-icon-close-icon.pi.pi-times {
+    font-size: 2rem;
+}

@@ -3,6 +3,8 @@ import { Category } from 'src/app/models/category.model';
 import { CategoryService } from '../../services/category.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import { UtilsService } from '../../services/utils.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-categories',
@@ -17,6 +19,8 @@ export class CategoriesComponent implements OnInit {
     private categoryService: CategoryService,
     private spinner: NgxSpinnerService,
     private router: Router,
+    private utilsService: UtilsService,
+    private messageService: MessageService
   ) {
     
     this.categories = [];
@@ -25,6 +29,11 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
+    if (history.state.categoryCreated === true) {
+      setTimeout(() => {
+        this.utilsService.showToastMessage('categoriesPage', 'success', 'Create game', 'The game was created with success.', this.messageService);
+      }, 1000);
+    }
   }
 
   /**
@@ -38,6 +47,7 @@ export class CategoriesComponent implements OnInit {
       
     }, error => {
       this.spinner.hide();
+      this.utilsService.showToastMessage('categoriesPage', 'error', 'Error getting the categories', 'Something went wrong getting the categories data.', this.messageService);
       console.log(error);
     });
   }

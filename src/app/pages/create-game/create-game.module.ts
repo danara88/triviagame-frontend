@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CreateGameRoutingModule } from './create-game-routing.module';
 import { CreateGameComponent } from './create-game.component';
 import { LayoutModule } from '../layout/layout.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { LayoutModule } from '../layout/layout.module';
     CreateGameRoutingModule,
     LayoutModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule,
   ]
 })
 export class CreateGameModule { }

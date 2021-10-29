@@ -6,6 +6,8 @@ import { Question } from 'src/app/models/question.model';
 import { QuestionService } from '../../services/question.service';
 import { Answer } from 'src/app/models/answer.model';
 import { Game } from 'src/app/models/game.model';
+import { UtilsService } from '../../services/utils.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-game',
@@ -33,6 +35,8 @@ export class GameComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
     private router: Router,
+    private utilsService: UtilsService,
+    private messageService: MessageService,
   ) { 
 
     this.numberQuestion = 1;
@@ -83,6 +87,7 @@ export class GameComponent implements OnInit {
     }, error => {
       console.log(error);
       this.spinner.hide();
+      this.utilsService.showToastMessage('gamePage', 'error', 'Error in game creation', 'Something went wrong. We can not start the game.', this.messageService);
       this.router.navigateByUrl('/home');
     });
   }
@@ -104,6 +109,7 @@ export class GameComponent implements OnInit {
 
     }, error => {
       console.log(error);
+      this.utilsService.showToastMessage('gamePage', 'error', 'Error in getting game questions', 'Something went wrong getting the questions.', this.messageService);
       this.router.navigateByUrl('/home');
     });
   } 
@@ -168,7 +174,7 @@ export class GameComponent implements OnInit {
     }, error => {
       this.spinner.hide();
       console.log(error);
-
+      this.utilsService.showToastMessage('gamePage', 'error', 'Error ending game', 'Something went wrong. We could not end the game.', this.messageService);
     });
   }
 

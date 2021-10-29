@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/category.model';
 import { CreateNewCategory } from '../../interfaces/category';
 import { CategoryService } from '../../services/category.service';
@@ -11,6 +11,8 @@ import { AnswerService } from '../../services/answer.service';
 import { CreateAnswer } from '../../interfaces/answer';
 import { Answer } from 'src/app/models/answer.model';
 import { Router } from '@angular/router';
+import { UtilsService } from '../../services/utils.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-create-game',
@@ -33,6 +35,8 @@ export class CreateGameComponent implements OnInit {
     private answerService: AnswerService,
     private router: Router,
     private spinner: NgxSpinnerService,
+    private utilsService: UtilsService,
+    private messageService: MessageService
   ) { 
 
     this.formCustom = new FormGroup({});
@@ -106,7 +110,10 @@ export class CreateGameComponent implements OnInit {
    */
   async onSubmit() {
     // Don't submit if the form is invalid and if there is one not selected correct answer
-    if(this.formCustom.invalid || Object.values(this.selectedCorrectAnswers).includes(null)) return;
+    if(this.formCustom.invalid || Object.values(this.selectedCorrectAnswers).includes(null)) {
+      this.utilsService.showToastMessage('createGameToast', 'error', 'Error create game', 'You must fill all the required inputs.', this.messageService);
+      return;
+    }
 
     this.spinner.show();
 
@@ -123,6 +130,7 @@ export class CreateGameComponent implements OnInit {
       this.spinner.hide();
       this.status = 'error';
       this.alertMessage = 'Error, something went wrong';
+      this.utilsService.showToastMessage('createGameToast', 'error', 'Error create category', this.alertMessage, this.messageService);
       console.log(error);
       return;
     }
@@ -171,6 +179,7 @@ export class CreateGameComponent implements OnInit {
 
       } catch (error) {
         console.log(error);
+        this.utilsService.showToastMessage('createGameToast', 'error', 'Error create question', 'Something went wrong creating the question.', this.messageService);
         this.spinner.hide();
         return;
       }
@@ -178,7 +187,7 @@ export class CreateGameComponent implements OnInit {
   
     this.spinner.hide();
     this.formCustom.reset();
-    this.router.navigateByUrl('/home');
+    this.router.navigate(['/home'], {state: {categoryCreated: true}});
   
   }
 
@@ -195,6 +204,7 @@ export class CreateGameComponent implements OnInit {
 
       } catch(error) {
         this.spinner.hide();
+        this.utilsService.showToastMessage('createGameToast', 'error', 'Error create answer', 'Something went wrong creating the answer.', this.messageService);
         console.log(error);
 
       }
