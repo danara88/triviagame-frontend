@@ -22,7 +22,7 @@
     <div class="game-finish" *ngIf="submittedGame && grade >= 60">
         <div class="game-finish__head d-flex flex-column align-items-center">
             <div class="game-finish__image">
-                <img src="../../../assets/img/like.svg" alt="Good Trivia Game">
+                <img src="assets/img/like.svg" alt="Good Trivia Game">
             </div>
             <span>You did great !</span>
         </div>
@@ -37,7 +37,9 @@
                 <span>Your score: {{ score }} / {{ totalScore }}</span>
             </div>
 
+            <button class="btn-custom mb-3" routerLink="/ranking">View ranking players</button>
             <button class="btn-custom" routerLink="/home">Exit Game</button>
+            
         </div>
        
     </div>
@@ -47,7 +49,7 @@
     <div class="game-finish" *ngIf="submittedGame && grade < 60">
         <div class="game-finish__head d-flex flex-column align-items-center">
             <div class="game-finish__image">
-                <img src="../../../assets/img/dislike.svg" alt="Good Trivia Game">
+                <img src="assets/img/dislike.svg" alt="Good Trivia Game">
             </div>
             <span>You did bad :(</span>
         </div>
@@ -62,7 +64,9 @@
                 <span>Your score: {{ score }} / {{ totalScore }}</span>
             </div>
 
+            <button class="btn-custom mb-3" routerLink="/ranking">View ranking players</button>
             <button class="btn-custom" routerLink="/home">Exit Game</button>
+
         </div>
        
     </div>

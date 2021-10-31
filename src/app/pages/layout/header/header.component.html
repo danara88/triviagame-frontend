@@ -29,7 +29,8 @@
                 </div>
             </div>
             <li><a href="#" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fas fa-user"></i>Profile</a></li>
-            <li><a href="#" routerLink="/create-game"><i class="fas fa-plus"></i>Create Game</a></li>
+            <li *ngIf="identity.role === 'ADMIN_ROLE'"><a href="#" routerLink="/create-game"><i class="fas fa-plus"></i>Create Game</a></li>
+            <li><a routerLink="/ranking"><i class="far fa-hand-peace"></i>View ranking</a></li>
             <li><a href="mailto:webmaster@example.com"><i class="far fa-question-circle"></i>Support</a></li>
             <li><a href="#" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-sign-out-alt"></i>Log out</a></li>
         </ul>

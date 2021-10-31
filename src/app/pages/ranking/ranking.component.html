@@ -1,0 +1,24 @@
+<app-layout>
+
+   <div class="ranking-page">
+        <div class="ranking-page__image">
+            <img src="assets/img/top.png" alt="Top 5 players TriviaGame">
+        </div>
+        <div class="ranking-page__info">
+            <h3>Top 5 players</h3>
+            <div class="ranking-page__players">
+                <ul>
+                    <li *ngFor="let ranking of rankings; let i = index" 
+                        [ngStyle]="{'font-size': 30 - (i + 8) + 'px'}" 
+                        [ngClass]="{'user-in-ranking' : ranking.user._id === identity!.uid}">
+                            {{ ranking.user.fullName }} 
+                            <span class="ranking-points" [ngStyle]="{'font-size': 40 - (i + 8) + 'px'}">{{ ranking.totalScore }}</span> points
+                    </li>
+                </ul>
+            </div>
+        </div>
+   </div>
+
+   <p-toast key="rankingPage" position="top-center"></p-toast>
+
+</app-layout>
